@@ -7,7 +7,7 @@ import tensorflow as tf
 import manga_datainput
 import manga_model
 
-N_CLASSES = 4
+NUMBER_CLASSES = 4
 IMAGE_HEIGHT = 170
 IMAGE_WIDTH = 120
 IMAGE_CHANNEL = 3
@@ -17,7 +17,7 @@ TRAIN_DATA_SIZE = 16000
 TEST_DATA_SIZE = 4000
 NUM_EPOCHS = 10000
 MAX_STEP = 100000 
-learning_rate = 0.0001
+LEARNING_RATE = 0.0001
 
 
 def run_training():
@@ -34,9 +34,9 @@ def run_training():
     label_batch = tf.placeholder(tf.int32, shape=[BATCH_SIZE])
     keep_prob = tf.placeholder(tf.float32) 
 
-    logits = manga_model.model(image_batch, BATCH_SIZE, N_CLASSES, keep_prob)
+    logits = manga_model.model(image_batch, BATCH_SIZE, NUMBER_CLASSES, keep_prob)
     loss = manga_model.losses(logits, label_batch)        
-    train_op = manga_model.trainning(loss, learning_rate)
+    train_op = manga_model.trainning(loss, LEARNING_RATE)
     acc = manga_model.evaluation(logits, label_batch)
 
     init_op = tf.group(tf.initialize_all_variables(), tf.initialize_local_variables())
